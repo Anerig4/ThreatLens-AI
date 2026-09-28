@@ -160,21 +160,21 @@ def show_performance_metrics():
     with tabs[0]:
         fp = os.path.join(plots_path, 'rf_confusion.png')
         if os.path.exists(fp):
-            st.image(fp, caption="Random Forest Confusion Matrix", use_column_width=True)
+            st.image(fp, caption="Random Forest Confusion Matrix", width="stretch")
         else:
             st.info("Run train.py first to generate plots.")
     
     with tabs[1]:
         fp = os.path.join(plots_path, 'lr_confusion.png')
         if os.path.exists(fp):
-            st.image(fp, caption="Logistic Regression Confusion Matrix", use_column_width=True)
+            st.image(fp, caption="Logistic Regression Confusion Matrix", width="stretch")
         else:
             st.info("Run train.py first to generate plots.")
     
     with tabs[2]:
         fp = os.path.join(plots_path, 'feature_importance.png')
         if os.path.exists(fp):
-            st.image(fp, caption="Top Feature Importances", use_column_width=True)
+            st.image(fp, caption="Top Feature Importances", width="stretch")
         else:
             st.info("Run train.py first to generate plots.")
 
@@ -216,13 +216,14 @@ with tab1:
         
         # Handle if file has header
         if df.iloc[0, 0] == 'duration' or df.columns[0] == 'duration':
+            uploaded.seek(0)
             df = pd.read_csv(uploaded)
         else:
             cols = COLUMN_NAMES[:df.shape[1]]
             df.columns = cols
         
         st.markdown(f"**Loaded {len(df)} records**")
-        st.dataframe(df.head(5), use_container_width=True)
+        st.dataframe(df.head(5), width="stretch")
         
         if st.button("🚀 Run Prediction", type="primary"):
             with st.spinner("Analyzing traffic..."):
@@ -275,7 +276,7 @@ with tab1:
                     st.markdown("#### Full Prediction Results")
                     
                     # Color-code risk in display
-                    st.dataframe(results, use_container_width=True)
+                    st.dataframe(results, width="stretch")
                     
                     # Download
                     csv_out = results.to_csv(index=False).encode()

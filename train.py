@@ -84,7 +84,7 @@ def train_classification_models(X_train, y_train, X_test, y_test, feature_names)
 
     # --- Logistic Regression ---
     print("\n[3] Training Logistic Regression...")
-    lr = LogisticRegression(max_iter=1000, random_state=42, solver='lbfgs', multi_class='auto')
+    lr = LogisticRegression(max_iter=1000, random_state=42, solver='lbfgs')
     lr.fit(X_res, y_res)
     lr_preds = evaluate_model(lr, X_test, y_test, "Logistic Regression")
     plot_confusion_matrix(y_test, lr_preds, sorted(y_test.unique()),
